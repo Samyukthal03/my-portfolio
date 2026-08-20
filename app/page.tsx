@@ -1,15 +1,14 @@
 'use client';
 
 import React, { useState } from 'react';
-import dynamic from 'next/dynamic';
 import CursorCat from '@/components/CursorCat';
+import Atmosphere from '@/components/Atmosphere';
+import DepthText from '@/components/DepthText';
+import ExperienceAndWork from '@/components/ExperienceAndWork';
 import { 
   Menu, X, Mail, Phone, Github, Linkedin, 
   Award, Briefcase, Code, Sparkles 
 } from 'lucide-react';
-
-// Force client-side render so the Silk WebGL canvas loads properly
-const Silk = dynamic(() => import('@/components/Silk'), { ssr: false });
 
 export default function Portfolio() {
   const [menuOpen, setMenuOpen] = useState(false);
@@ -19,29 +18,25 @@ export default function Portfolio() {
   const [showFoodCard, setShowFoodCard] = useState(false);
 
   return (
-    <div className="relative min-h-screen text-slate-100 font-sans selection:bg-teal-500/30">
-      {/* Background Silk Layer */}
-      <div className="fixed inset-0 -z-10 w-full h-full bg-slate-950 pointer-events-none">
-        <Silk speed={3.5} scale={1.2} color="#1b3b5a" noiseIntensity={1.4} rotation={0.2} />
-      </div>
+    <div className="editorial-shell relative min-h-screen selection:bg-[#E85D5D]/30">
+      <Atmosphere />
 
       {/* OneKo Pixel Cat Cursor Follower */}
       <CursorCat />
 
       {/* Navigation Header */}
-      <header className="sticky top-0 z-40 flex items-center justify-between px-6 py-4 backdrop-blur-md bg-slate-950/50 border-b border-white/10">
-        <div className="flex items-center gap-2">
-          <span className="text-xl font-bold tracking-tight bg-clip-text text-transparent bg-gradient-to-r from-teal-300 to-cyan-400">
-            Samyuktha A L
-          </span>
-          <span className="text-xs px-2.5 py-0.5 rounded-full bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">
-            MCA GenAI
-          </span>
-        </div>
+      <header className="editorial-nav sticky top-0 z-40 flex items-center justify-between border-b px-5 py-4 md:px-8">
+        <a href="#about" className="leading-none" aria-label="Back to top">
+          <span className="block text-sm font-bold tracking-[0.13em] text-[#F5F1EA] md:text-base">SAMYUKTHA A L</span>
+          <span className="editorial-label mt-1 block text-[0.55rem] md:text-[0.625rem]">MCA · GENERATIVE AI</span>
+        </a>
 
         <button
           onClick={() => setMenuOpen(!menuOpen)}
-          className="flex items-center gap-2 px-4 py-2 rounded-full bg-white/10 hover:bg-white/20 border border-white/20 transition-all cursor-pointer"
+          aria-label={menuOpen ? 'Close menu' : 'Open menu'}
+          aria-expanded={menuOpen}
+          data-menu-open={menuOpen}
+          className="editorial-button inline-flex items-center gap-3 px-3 py-2"
         >
           <span className="text-sm">🐾 Menu</span>
           {menuOpen ? <X size={18} /> : <Menu size={18} />}
@@ -50,40 +45,35 @@ export default function Portfolio() {
 
       {/* Mobile Menu Dropdown */}
       {menuOpen && (
-        <nav className="fixed inset-x-4 top-20 z-40 p-6 rounded-2xl bg-slate-900/95 border border-white/10 backdrop-blur-xl shadow-2xl md:max-w-xs md:ml-auto space-y-3">
-          <a href="#about" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10">About Me</a>
-          <a href="#experience" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10">Experience</a>
-          <a href="#projects" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10">Projects</a>
-          <a href="#skills" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10">Skills</a>
-          <a href="#certs" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10">Certifications & Awards</a>
-          <a href="#contact" onClick={() => setMenuOpen(false)} className="block p-2 rounded-lg hover:bg-white/10 font-bold text-cyan-400">Feed Cat / Hire Me</a>
+        <nav className="editorial-menu fixed inset-0 z-30 flex min-h-screen flex-col justify-center px-6 pt-20 md:px-[10vw]" aria-label="Main navigation">
+          <a href="#about" onClick={() => setMenuOpen(false)} className="editorial-menu__link">01 / ABOUT</a>
+          <a href="#experience" onClick={() => setMenuOpen(false)} className="editorial-menu__link">02 / EXPERIENCE</a>
+          <a href="#projects" onClick={() => setMenuOpen(false)} className="editorial-menu__link">03 / SELECTED WORK</a>
+          <a href="#skills" onClick={() => setMenuOpen(false)} className="editorial-menu__link">04 / CAPABILITIES</a>
+          <a href="#certs" onClick={() => setMenuOpen(false)} className="editorial-menu__link">05 / EDUCATION</a>
+          <a href="#contact" onClick={() => setMenuOpen(false)} className="editorial-menu__link">06 / CONTACT</a>
         </nav>
       )}
 
       {/* Hero Section */}
-      <section id="about" className="flex flex-col items-center justify-center min-h-[65vh] text-center px-6 pt-12">
-        <p className="text-cyan-400 font-semibold tracking-widest uppercase text-xs mb-3">Welcome to Samyuktha's World</p>
-        <h1 className="text-4xl md:text-6xl font-extrabold mb-4 tracking-tight">
-          Building AI & Human-Centered Tech
-        </h1>
-        <p className="max-w-2xl text-slate-300 text-base md:text-lg mb-6 leading-relaxed">
-          MCA student in Generative AI at SRM University with a strong foundation in data validation, analytical research, full-stack engineering, and applied ML[cite: 1].
-        </p>
-        <div className="flex flex-wrap justify-center gap-3">
-          <a href="https://github.com/Samyukthal03" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-sm">
-            <Github size={16} /> GitHub[cite: 1]
-          </a>
-          <a href="https://www.linkedin.com/in/samyuktha-al-366052284/" target="_blank" rel="noreferrer" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-white/10 hover:bg-white/20 border border-white/15 text-sm">
-            <Linkedin size={16} /> LinkedIn[cite: 1]
-          </a>
-          <a href="mailto:samyukthanathan03@gmail.com" className="flex items-center gap-2 px-4 py-2 rounded-xl bg-cyan-600/30 hover:bg-cyan-600/50 border border-cyan-500/40 text-sm">
-            <Mail size={16} /> Email Me[cite: 1]
-          </a>
+      <section id="about" className="relative mx-auto flex min-h-[calc(100svh-65px)] max-w-7xl flex-col justify-center px-6 pb-20 pt-16 md:px-10 md:pb-28 md:pt-10">
+        <p className="editorial-label mb-8 text-[#FF7373]">01 / AI · ML · FULL STACK · CREATIVE TECH</p>
+        <DepthText text="ELEVATE" layers={34} depth={2.4} faceColor="#F5F1EA" depthColor="#E85D5D" tilt={7.5} pointerTracking smoothing={0.14} perspective={900} autoOrbit orbitSpeed={0.35} fontSize="clamp(3rem, 12vw, 7rem)" fontWeight={900} shadow />
+        <div className="mt-14 grid max-w-5xl gap-8 md:ml-[21%] md:grid-cols-[minmax(0,1fr)_auto] md:items-end">
+          <p className="max-w-xl text-xl leading-snug tracking-tight text-[#F5F1EA] md:text-3xl">Building AI-powered and human-centered digital experiences where technology meets creativity.</p>
+          <p className="editorial-label max-w-[15rem] leading-relaxed">MCA student in Generative AI, translating curiosity into useful, thoughtful technology.</p>
         </div>
+        <div className="mt-10 flex flex-wrap gap-3 md:ml-[21%]">
+          <a href="#projects" className="editorial-button editorial-button--primary px-5 py-3">EXPLORE MY WORK <span aria-hidden="true">↘</span></a>
+          <a href="#contact" className="editorial-button px-5 py-3">LET&apos;S TALK <span aria-hidden="true">↗</span></a>
+        </div>
+        <span className="editorial-label absolute bottom-7 right-6 hidden text-right leading-relaxed md:block md:right-10">SCROLL TO EXPLORE<br />↓</span>
       </section>
 
+      <ExperienceAndWork />
+
       {/* Experience Section */}
-      <section id="experience" className="max-w-4xl mx-auto px-6 py-12">
+      <section id="experience-legacy" className="hidden">
         <div className="flex items-center justify-between mb-6 pb-2 border-b border-white/10">
           <div className="flex items-center gap-3">
             <Briefcase className="text-cyan-400" />
@@ -135,7 +125,7 @@ export default function Portfolio() {
       </section>
 
       {/* Projects Section */}
-      <section id="projects" className="max-w-4xl mx-auto px-6 py-12">
+      <section id="projects-legacy" className="hidden">
         <div className="flex items-center justify-between mb-6 pb-2 border-b border-white/10">
           <div className="flex items-center gap-3">
             <Code className="text-cyan-400" />
