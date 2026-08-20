@@ -5,6 +5,7 @@ import CursorCat from '@/components/CursorCat';
 import Atmosphere from '@/components/Atmosphere';
 import DepthText from '@/components/DepthText';
 import ExperienceAndWork from '@/components/ExperienceAndWork';
+import CapabilitiesAndContact from '@/components/CapabilitiesAndContact';
 import { 
   Menu, X, Mail, Phone, Github, Linkedin, 
   Award, Briefcase, Code, Sparkles 
@@ -177,8 +178,10 @@ export default function Portfolio() {
         )}
       </section>
 
+      <CapabilitiesAndContact />
+
       {/* Skills Section */}
-      <section id="skills" className="max-w-4xl mx-auto px-6 py-12">
+      <section id="skills-legacy" className="hidden">
         <div className="flex items-center gap-3 mb-6 pb-2 border-b border-white/10">
           <Sparkles className="text-cyan-400" />
           <h2 className="text-2xl font-bold">Skills & Competencies</h2>
@@ -218,7 +221,7 @@ export default function Portfolio() {
       </section>
 
       {/* Certifications, Education & Awards */}
-      <section id="certs" className="max-w-4xl mx-auto px-6 py-12">
+      <section id="certs-legacy" className="hidden">
         <div className="flex items-center justify-between mb-6 pb-2 border-b border-white/10">
           <div className="flex items-center gap-3">
             <Award className="text-cyan-400" />
@@ -266,7 +269,7 @@ export default function Portfolio() {
       </section>
 
       {/* Feed Cat / Hire Me Section */}
-      <section id="contact" className="max-w-xl mx-auto px-6 py-20 text-center">
+      <section id="contact-legacy" className="hidden">
         <button
           onClick={() => setShowFoodCard(!showFoodCard)}
           className="group inline-flex flex-col items-center justify-center p-8 rounded-3xl bg-amber-500/20 border-2 border-amber-400/40 hover:bg-amber-500/30 transition-all cursor-pointer shadow-lg hover:scale-105"
